@@ -1,7 +1,4 @@
 spring:
-  config:
-    activate:
-      on-profile: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/horecapilot
     username: postgres
@@ -9,5 +6,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+    open-in-view: false
   flyway:
     enabled: true
