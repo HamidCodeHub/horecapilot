@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/horecapilot
+    username: postgres
+    password: pass
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
