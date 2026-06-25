@@ -2,6 +2,7 @@ package com.hamid.horecapilot.staff.service;
 
 import com.hamid.horecapilot.common.BusinessRuleException;
 import com.hamid.horecapilot.common.EntityNotFoundException;
+import com.hamid.horecapilot.common.Tenant;
 import com.hamid.horecapilot.staff.model.Employee;
 import com.hamid.horecapilot.staff.model.Shift;
 import com.hamid.horecapilot.staff.repository.EmployeeRepository;
@@ -35,7 +36,7 @@ public class ShiftService {
         validateShiftDuration(request.oraInizio(), request.oraFine());
 
         Shift shift = new Shift();
-        shift.setRestaurantId(1L);
+        shift.setRestaurantId(Tenant.DEFAULT_RESTAURANT_ID);
         shift.setEmployee(employee);
         shift.setData(request.data());
         shift.setOraInizio(request.oraInizio());

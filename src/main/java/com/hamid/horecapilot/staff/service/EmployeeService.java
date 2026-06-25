@@ -1,6 +1,7 @@
 package com.hamid.horecapilot.staff.service;
 
 import com.hamid.horecapilot.common.EntityNotFoundException;
+import com.hamid.horecapilot.common.Tenant;
 import com.hamid.horecapilot.staff.model.Employee;
 import com.hamid.horecapilot.staff.repository.EmployeeRepository;
 import com.hamid.horecapilot.staff.dto.EmployeeCreateRequest;
@@ -22,9 +23,8 @@ public class EmployeeService {
 
     @Transactional
     public EmployeeResponse create(EmployeeCreateRequest request) {
-        // TODO: dal contesto utente quando ci sarà l'auth
         Employee employee = new Employee();
-        employee.setRestaurantId(1L);
+        employee.setRestaurantId(Tenant.DEFAULT_RESTAURANT_ID);
         employee.setNome(request.nome());
         employee.setRuolo(request.ruolo());
         employee.setCostoOrarioAziendale(request.costoOrarioAziendale());
