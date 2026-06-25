@@ -1,7 +1,8 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.controller;
 
 import com.hamid.horecapilot.common.EntityNotFoundException;
 import com.hamid.horecapilot.staff.dto.ShiftResponse;
+import com.hamid.horecapilot.staff.service.ShiftService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;

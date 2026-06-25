@@ -1,4 +1,4 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

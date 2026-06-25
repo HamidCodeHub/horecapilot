@@ -1,7 +1,11 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.service;
 
 import com.hamid.horecapilot.common.BusinessRuleException;
 import com.hamid.horecapilot.common.EntityNotFoundException;
+import com.hamid.horecapilot.staff.model.Employee;
+import com.hamid.horecapilot.staff.model.Shift;
+import com.hamid.horecapilot.staff.repository.EmployeeRepository;
+import com.hamid.horecapilot.staff.repository.ShiftRepository;
 import com.hamid.horecapilot.staff.dto.ShiftCreateRequest;
 import com.hamid.horecapilot.staff.dto.ShiftResponse;
 import com.hamid.horecapilot.staff.dto.ShiftUpdateRequest;

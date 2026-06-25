@@ -1,5 +1,6 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.repository;
 
+import com.hamid.horecapilot.staff.model.Shift;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

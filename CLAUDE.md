@@ -5,7 +5,7 @@ Backend Spring Boot per il controllo della redditività operativa di ristoranti 
 personale, turni, vendite, menu/ricette, food cost e margini in un unico posto.
 Il KPI centrale del prodotto è il **prime cost = food cost + labor cost**.
 
-MVP: tutto inserito **manualmente** tramite le API REST del progetto.
+MVP: tutto inserito **manualmente** tramite le APappI REST del progetto.
 Nessuna integrazione esterna in questa fase (no fatturazione/Aruba, no parsing PDF del menu).
 
 ## Stack
@@ -15,7 +15,8 @@ Nessuna integrazione esterna in questa fase (no fatturazione/Aruba, no parsing P
 - Base package: `com.hamid.horecapilot`
 
 ## Architettura
-Monolite modulare, package **per dominio** (non per layer tecnico):
+Monolite modulare, **package per funzionalità** al primo livello (NON package-by-layer
+globale), con i layer tradizionali come **sotto-package dentro ogni funzionalità**:
 
 ```
 com.hamid.horecapilot
@@ -26,7 +27,29 @@ com.hamid.horecapilot
 └── common      (config, gestione eccezioni globale, classi condivise)
 ```
 
-Ogni package di dominio contiene le proprie entity, repository, service, dto e controller.
+Struttura interna di ogni funzionalità (esempio `staff`):
+
+```
+staff
+├── model        → Employee, Shift               (entity JPA)
+├── repository   → EmployeeRepository, ShiftRepository
+├── service      → EmployeeService, ShiftService
+├── controller   → EmployeeController, ShiftController
+└── dto          → ...Request, ...Response
+```
+
+Regole di struttura:
+- La **funzionalità è sempre l'unità di primo livello**: per capire o modificare "staff"
+  si apre un solo package. Niente package-by-layer globale (no `com.hamid.horecapilot.repository`
+  con dentro i repository di tutti i domini): dissolverebbe i confini dei moduli.
+- `dto` resta **un unico sotto-package** per funzionalità (non separare `dto/request` e
+  `dto/response`: a questa dimensione è solo cerimonia).
+- I repository sono `public` (stanno in un sotto-package diverso dai service). Il confine
+  fra funzionalità è quindi una **convenzione**, non imposto dal compilatore: un dominio
+  non deve dipendere dai repository/entity di un altro dominio, ma passare dai suoi service.
+  L'enforcement automatico (ArchUnit) è un'aggiunta post-MVP, non ora.
+- `analytics` non ha `model`/`repository`: è solo `service` (+ `dto` per i risultati KPI),
+  e legge attraverso i repository/service degli altri domini.
 
 ## Metodo di lavoro: slice verticali
 Si costruisce **una funzionalità end-to-end alla volta**, in quest'ordine:

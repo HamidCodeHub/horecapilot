@@ -1,8 +1,9 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.controller;
 
 import com.hamid.horecapilot.staff.dto.EmployeeCreateRequest;
 import com.hamid.horecapilot.staff.dto.EmployeeResponse;
 import com.hamid.horecapilot.staff.dto.EmployeeUpdateRequest;
+import com.hamid.horecapilot.staff.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

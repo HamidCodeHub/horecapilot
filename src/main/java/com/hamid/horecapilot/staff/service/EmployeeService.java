@@ -1,6 +1,8 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.service;
 
 import com.hamid.horecapilot.common.EntityNotFoundException;
+import com.hamid.horecapilot.staff.model.Employee;
+import com.hamid.horecapilot.staff.repository.EmployeeRepository;
 import com.hamid.horecapilot.staff.dto.EmployeeCreateRequest;
 import com.hamid.horecapilot.staff.dto.EmployeeResponse;
 import com.hamid.horecapilot.staff.dto.EmployeeUpdateRequest;

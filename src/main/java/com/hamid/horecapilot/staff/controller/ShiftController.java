@@ -1,8 +1,9 @@
-package com.hamid.horecapilot.staff;
+package com.hamid.horecapilot.staff.controller;
 
 import com.hamid.horecapilot.staff.dto.ShiftCreateRequest;
 import com.hamid.horecapilot.staff.dto.ShiftResponse;
 import com.hamid.horecapilot.staff.dto.ShiftUpdateRequest;
+import com.hamid.horecapilot.staff.service.ShiftService;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
