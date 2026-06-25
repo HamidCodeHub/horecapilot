@@ -9,3 +9,9 @@ spring:
     open-in-view: false
   flyway:
     enabled: true
+
+horecapilot:
+  targets:
+    labor-cost-percent-lower: 25
+    labor-cost-percent-target: 33
+    labor-cost-percent-upper: 38
