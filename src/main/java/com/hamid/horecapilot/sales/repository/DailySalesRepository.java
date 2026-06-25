@@ -16,8 +16,8 @@ public interface DailySalesRepository extends JpaRepository<DailySales, Long> {
     @Query("""
         SELECT d FROM DailySales d
         WHERE d.restaurantId = :restaurantId
-          AND (:from IS NULL OR d.data >= :from)
-          AND (:to   IS NULL OR d.data <= :to)
+          AND (CAST(:from AS LocalDate) IS NULL OR d.data >= :from)
+          AND (CAST(:to   AS LocalDate) IS NULL OR d.data <= :to)
         ORDER BY d.data
         """)
     List<DailySales> search(@Param("restaurantId") Long restaurantId,

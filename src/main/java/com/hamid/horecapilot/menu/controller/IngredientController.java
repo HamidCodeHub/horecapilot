@@ -4,6 +4,7 @@ import com.hamid.horecapilot.menu.dto.IngredientCreateRequest;
 import com.hamid.horecapilot.menu.dto.IngredientResponse;
 import com.hamid.horecapilot.menu.dto.IngredientUpdateRequest;
 import com.hamid.horecapilot.menu.service.IngredientService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class IngredientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<IngredientResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<IngredientResponse> getById(
+        @PathVariable @Parameter(example = "1") Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
@@ -41,13 +43,15 @@ public class IngredientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<IngredientResponse> update(@PathVariable Long id,
-                                                      @Valid @RequestBody IngredientUpdateRequest request) {
+    public ResponseEntity<IngredientResponse> update(
+        @PathVariable @Parameter(example = "1") Long id,
+        @Valid @RequestBody IngredientUpdateRequest request) {
         return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+    public ResponseEntity<Void> deactivate(
+        @PathVariable @Parameter(example = "1") Long id) {
         service.deactivate(id);
         return ResponseEntity.noContent().build();
     }

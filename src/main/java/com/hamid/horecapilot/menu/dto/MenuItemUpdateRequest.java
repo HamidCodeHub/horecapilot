@@ -1,5 +1,6 @@
 package com.hamid.horecapilot.menu.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public record MenuItemUpdateRequest(
-    @NotBlank @Size(max = 150) String nome,
-    @NotNull @DecimalMin("0.0") @Digits(integer = 8, fraction = 2) BigDecimal prezzoVendita,
-    @Size(max = 60) String categoria
+    @NotBlank @Size(max = 150) @Schema(example = "Pasta al Pomodoro") String nome,
+    @NotNull @DecimalMin("0.0") @Digits(integer = 8, fraction = 2) @Schema(example = "14.00") BigDecimal prezzoVendita,
+    @Size(max = 60) @Schema(example = "Primo") String categoria
 ) {}

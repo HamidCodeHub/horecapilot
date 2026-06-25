@@ -4,6 +4,7 @@ import com.hamid.horecapilot.staff.dto.ShiftCreateRequest;
 import com.hamid.horecapilot.staff.dto.ShiftResponse;
 import com.hamid.horecapilot.staff.dto.ShiftUpdateRequest;
 import com.hamid.horecapilot.staff.service.ShiftService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -33,26 +34,31 @@ public class ShiftController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ShiftResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<ShiftResponse> getById(
+        @PathVariable @Parameter(example = "1") Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<ShiftResponse>> search(
-        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
-        @RequestParam(required = false) Long employeeId) {
+        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-01") LocalDate from,
+        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-30") LocalDate to,
+        @RequestParam(required = false) @Parameter(example = "1") Long employeeId) {
         return ResponseEntity.ok(service.search(from, to, employeeId));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ShiftResponse> update(@PathVariable Long id,
-                                                 @Valid @RequestBody ShiftUpdateRequest request) {
+    public ResponseEntity<ShiftResponse> update(
+        @PathVariable @Parameter(example = "1") Long id,
+        @Valid @RequestBody ShiftUpdateRequest request) {
         return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(
+        @PathVariable @Parameter(example = "1") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

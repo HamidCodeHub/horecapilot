@@ -4,6 +4,7 @@ import com.hamid.horecapilot.staff.dto.EmployeeCreateRequest;
 import com.hamid.horecapilot.staff.dto.EmployeeResponse;
 import com.hamid.horecapilot.staff.dto.EmployeeUpdateRequest;
 import com.hamid.horecapilot.staff.service.EmployeeService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<EmployeeResponse> getById(
+        @PathVariable @Parameter(example = "1") Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
@@ -41,13 +43,15 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmployeeResponse> update(@PathVariable Long id,
-                                                    @Valid @RequestBody EmployeeUpdateRequest request) {
+    public ResponseEntity<EmployeeResponse> update(
+        @PathVariable @Parameter(example = "1") Long id,
+        @Valid @RequestBody EmployeeUpdateRequest request) {
         return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+    public ResponseEntity<Void> deactivate(
+        @PathVariable @Parameter(example = "1") Long id) {
         service.deactivate(id);
         return ResponseEntity.noContent().build();
     }

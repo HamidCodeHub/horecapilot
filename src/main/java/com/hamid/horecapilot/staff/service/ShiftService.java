@@ -59,10 +59,12 @@ public class ShiftService {
         return toResponse(shift);
     }
 
+    @Transactional(readOnly = true)
     public ShiftResponse getById(Long id) {
         return toResponse(findOrThrow(id));
     }
 
+    @Transactional(readOnly = true)
     public List<ShiftResponse> search(LocalDate from, LocalDate to, Long employeeId) {
         return shiftRepository.search(from, to, employeeId).stream()
             .map(this::toResponse)

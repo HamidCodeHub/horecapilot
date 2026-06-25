@@ -4,6 +4,7 @@ import com.hamid.horecapilot.menu.dto.MenuItemCreateRequest;
 import com.hamid.horecapilot.menu.dto.MenuItemResponse;
 import com.hamid.horecapilot.menu.dto.MenuItemUpdateRequest;
 import com.hamid.horecapilot.menu.service.MenuItemService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class MenuItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MenuItemResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<MenuItemResponse> getById(
+        @PathVariable @Parameter(example = "1") Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
@@ -41,13 +43,15 @@ public class MenuItemController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MenuItemResponse> update(@PathVariable Long id,
-                                                    @Valid @RequestBody MenuItemUpdateRequest request) {
+    public ResponseEntity<MenuItemResponse> update(
+        @PathVariable @Parameter(example = "1") Long id,
+        @Valid @RequestBody MenuItemUpdateRequest request) {
         return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+    public ResponseEntity<Void> deactivate(
+        @PathVariable @Parameter(example = "1") Long id) {
         service.deactivate(id);
         return ResponseEntity.noContent().build();
     }

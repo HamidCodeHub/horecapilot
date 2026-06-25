@@ -4,6 +4,7 @@ import com.hamid.horecapilot.analytics.dto.DailyKpiResponse;
 import com.hamid.horecapilot.analytics.dto.EmployeeKpiResponse;
 import com.hamid.horecapilot.analytics.dto.PeriodSummaryResponse;
 import com.hamid.horecapilot.analytics.service.AnalyticsService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,22 +27,28 @@ public class AnalyticsController {
 
     @GetMapping("/summary")
     public ResponseEntity<PeriodSummaryResponse> summary(
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-01") LocalDate from,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-30") LocalDate to) {
         return ResponseEntity.ok(service.periodSummary(from, to));
     }
 
     @GetMapping("/daily")
     public ResponseEntity<List<DailyKpiResponse>> daily(
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-01") LocalDate from,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-30") LocalDate to) {
         return ResponseEntity.ok(service.dailyBreakdown(from, to));
     }
 
     @GetMapping("/by-employee")
     public ResponseEntity<List<EmployeeKpiResponse>> byEmployee(
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-01") LocalDate from,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @Parameter(example = "2024-06-30") LocalDate to) {
         return ResponseEntity.ok(service.byEmployee(from, to));
     }
 }

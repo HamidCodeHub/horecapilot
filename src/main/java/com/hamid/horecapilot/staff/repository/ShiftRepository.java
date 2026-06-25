@@ -12,9 +12,9 @@ public interface ShiftRepository extends JpaRepository<Shift, Long> {
 
     @Query("""
         SELECT s FROM Shift s
-        WHERE (:from IS NULL OR s.data >= :from)
-          AND (:to IS NULL OR s.data <= :to)
-          AND (:employeeId IS NULL OR s.employee.id = :employeeId)
+        WHERE (CAST(:from AS LocalDate) IS NULL OR s.data >= :from)
+          AND (CAST(:to AS LocalDate) IS NULL OR s.data <= :to)
+          AND (CAST(:employeeId AS Long) IS NULL OR s.employee.id = :employeeId)
         ORDER BY s.data, s.oraInizio
         """)
     List<Shift> search(@Param("from") LocalDate from,
